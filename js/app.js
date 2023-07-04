@@ -4,27 +4,50 @@ let numero = 0;  // Se utiliza para saber el nº de pokemon a adivinar
 let cantidadAcertados = 0;  // Se utiliza para saber cuantos pokemons fueron adivinados
 let cantidadEncuestados = 0;  // Se utiliza para saber cuantos pokemons se intentaron adivinar
 
-// Alumno: crear la función restart:
-
-// 1) Debe borrar el contenido de texto de "resultText"
-// 2) Debe quitar la clase "success" de la imagen "imgpokemon"
-// 3) Debe crear un número aleatorio de 0 a la cantidad de pokemons
-// disponibles en la variable "pokemons" (proveniente del archivo data.js)
-// Esa variable la debe guardar en "numero".
-// 5) Debe modificar el atributo de "src" de "imgpokemon" para
-// que muestre como imagen el "thumbnail" del nº de pokemon a adivinar
-// (utilice la variable "numero" para buscar el pokemon candidato en "pokemons")
-
 const resultText = document.querySelector("#resultText")
 const imgPoke = document.querySelector("#imgpokemon")
+const input = document.querySelector("input")
+const puntaje = document.getElementById("puntaje")
 
 function restart() {    
     resultText.textContent = ""
     imgPoke.classList.remove("success")
     numero = Math.round(Math.random()*(pokemons.length));
     imgPoke.src = (pokemons[numero].thumbnail);
+    input.value = "";
+
+    //Pruebas
+    console.log(`Numero random: ${numero}`);
+    console.log(`"Id" poke: ${pokemons[numero].id}`)
+    console.log(`Nombre poke: ${pokemons[numero].name}`); 
+}
+
+function resultado() {
+    console.log("--Funcion resultado--");
+    cantidadEncuestados = (cantidadEncuestados + 1);
+        
+    (input.value) === (pokemons[numero].name) ? (
+        resultText.textContent = "-> ¡Felicitaciones! Respuesta correcta",
+        imgPoke.classList.add("success"),
+        cantidadAcertados = cantidadAcertados + 1,
+        console.log("Respuesta correcta")
+    ) : (
+        resultText.textContent = "-> RESPUESTA INCORRECTA",
+        imgPoke.classList.remove("success"),
+        console.log("Respuesta incorrecta")
+        );
+    
+    (cantidadAcertados) >= (cantidadEncuestados / 2) ? (
+        puntaje.classList.remove("puntajeBajo"),
+        console.log("Puntaje bueno")
+    ) : (
+        puntaje.classList.add("puntajeBajo"),
+        console.log("Puntaje bajo")
+    );
+
+    //Pruebas
+    console.log(`Cantidad de encuestados: ${cantidadEncuestados}`);
+    console.log(`Cantidad de acertados: ${cantidadAcertados}`);
 }
 
 restart();
-agregarEventos();
-
