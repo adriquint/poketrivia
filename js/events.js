@@ -3,6 +3,8 @@
 const send = document.getElementById('send')
 const reload = document.getElementById('reload')
 
-function agregarEventos() {  
-  reload.addEventListener("click", restart)
-}
+reload.onclick = () => restart()
+
+send.onclick = () => {
+  input.onchange = () => resultado()
+} 
