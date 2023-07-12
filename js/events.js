@@ -7,4 +7,6 @@ reload.onclick = () => restart()
 
 send.onclick = () => {
   input.onchange = () => resultado()
-} 
+  sessionStorage.setItem("acertados", cantidadAcertados),
+  sessionStorage.setItem("encuestados", cantidadEncuestados)
+}
